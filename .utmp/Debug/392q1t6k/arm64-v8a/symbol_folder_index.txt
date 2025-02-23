@@ -1,0 +1,1 @@
+C:\Users\SIematorPL\Documents\UnityProject\InGameEditor\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\build\intermediates\cxx\Debug\392q1t6k\obj\arm64-v8a
