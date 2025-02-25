@@ -5,17 +5,18 @@ public class Grid
     private int width, height;
     private int[,] gridArry;
     private Transform pointParent;
-    private float cellSize = 7f; // Cell size (same multiplier as before)
+    private float cellSize = 7f;
+    private Color gridColor;
 
-    public Grid(int width, int height, Transform pointParent)
+    public Grid(int width, int height, Transform pointParent, Color gridColor)
     {
         this.width = width;
         this.height = height;
         this.pointParent = pointParent;
+        this.gridColor = gridColor;
 
         gridArry = new int[width, height];
 
-        // Now draw grid lines with a LineRenderer
         DrawGridLines();
 
         foreach (int arry in gridArry)
@@ -68,8 +69,8 @@ public class Grid
 
         // Assign a simple material; using Sprites/Default works well for a basic line
         lr.material = new Material(Shader.Find("Sprites/Default"));
-        lr.startColor = Color.white;
-        lr.endColor = Color.white;
+        lr.startColor = gridColor;
+        lr.endColor = gridColor;
         lr.sortingOrder = -1;
     }
 }

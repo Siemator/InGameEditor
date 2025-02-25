@@ -1,0 +1,504 @@
+{
+    "trackPieces": [
+        {
+            "pieceName": "Obj.1",
+            "componenets": [
+                {
+                    "transformDatas": [
+                        {
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            },
+                            "rotation": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0,
+                                "w": 1.0
+                            },
+                            "scale": {
+                                "x": 1.0,
+                                "y": 1.0,
+                                "z": 1.0
+                            }
+                        }
+                    ],
+                    "boxColliderDatas": [
+                        {
+                            "isTrigger": false,
+                            "offset": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "size": {
+                                "x": 7.0,
+                                "y": 7.0
+                            }
+                        }
+                    ],
+                    "spriteRendererDatas": []
+                }
+            ],
+            "childs": [
+                {
+                    "childName": "Square",
+                    "componenets": [
+                        {
+                            "transformDatas": [
+                                {
+                                    "position": {
+                                        "x": 0.0,
+                                        "y": 0.0,
+                                        "z": 0.0
+                                    },
+                                    "rotation": {
+                                        "x": 0.0,
+                                        "y": 0.0,
+                                        "z": 0.0,
+                                        "w": 1.0
+                                    },
+                                    "scale": {
+                                        "x": 7.0,
+                                        "y": 7.0,
+                                        "z": 1.0
+                                    }
+                                }
+                            ],
+                            "boxColliderDatas": [],
+                            "spriteRendererDatas": [
+                                {
+                                    "color": {
+                                        "r": 0.9339622855186462,
+                                        "g": 0.5683072209358215,
+                                        "b": 0.5683072209358215,
+                                        "a": 1.0
+                                    },
+                                    "spriteName": "Square",
+                                    "material": "Sprite-Lit-Default (Instance)",
+                                    "orderInLayer": 0
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "childName": "Triangle",
+                    "componenets": [
+                        {
+                            "transformDatas": [
+                                {
+                                    "position": {
+                                        "x": 0.0,
+                                        "y": 0.0,
+                                        "z": 0.0
+                                    },
+                                    "rotation": {
+                                        "x": 0.0,
+                                        "y": 0.0,
+                                        "z": 0.0,
+                                        "w": 1.0
+                                    },
+                                    "scale": {
+                                        "x": 1.0,
+                                        "y": 2.0,
+                                        "z": 1.0
+                                    }
+                                }
+                            ],
+                            "boxColliderDatas": [],
+                            "spriteRendererDatas": [
+                                {
+                                    "color": {
+                                        "r": 1.0,
+                                        "g": 1.0,
+                                        "b": 1.0,
+                                        "a": 1.0
+                                    },
+                                    "spriteName": "Triangle",
+                                    "material": "Sprite-Lit-Default (Instance)",
+                                    "orderInLayer": 1
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "pieceName": "Obj.2",
+            "componenets": [
+                {
+                    "transformDatas": [
+                        {
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            },
+                            "rotation": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0,
+                                "w": 1.0
+                            },
+                            "scale": {
+                                "x": 1.0,
+                                "y": 1.0,
+                                "z": 1.0
+                            }
+                        }
+                    ],
+                    "boxColliderDatas": [
+                        {
+                            "isTrigger": false,
+                            "offset": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "size": {
+                                "x": 7.0,
+                                "y": 7.0
+                            }
+                        }
+                    ],
+                    "spriteRendererDatas": []
+                }
+            ],
+            "childs": [
+                {
+                    "childName": "Square",
+                    "componenets": [
+                        {
+                            "transformDatas": [
+                                {
+                                    "position": {
+                                        "x": 0.0,
+                                        "y": 0.0,
+                                        "z": 0.0
+                                    },
+                                    "rotation": {
+                                        "x": 0.0,
+                                        "y": 0.0,
+                                        "z": 0.0,
+                                        "w": 1.0
+                                    },
+                                    "scale": {
+                                        "x": 7.0,
+                                        "y": 7.0,
+                                        "z": 1.0
+                                    }
+                                }
+                            ],
+                            "boxColliderDatas": [],
+                            "spriteRendererDatas": [
+                                {
+                                    "color": {
+                                        "r": 0.3755339980125427,
+                                        "g": 0.8207547068595886,
+                                        "b": 0.7876390218734741,
+                                        "a": 1.0
+                                    },
+                                    "spriteName": "Square",
+                                    "material": "Sprite-Lit-Default (Instance)",
+                                    "orderInLayer": 0
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "childName": "Triangle",
+                    "componenets": [
+                        {
+                            "transformDatas": [
+                                {
+                                    "position": {
+                                        "x": 0.0,
+                                        "y": 0.0,
+                                        "z": 0.0
+                                    },
+                                    "rotation": {
+                                        "x": 0.0,
+                                        "y": 0.0,
+                                        "z": 0.0,
+                                        "w": 1.0
+                                    },
+                                    "scale": {
+                                        "x": 1.0,
+                                        "y": 2.0,
+                                        "z": 1.0
+                                    }
+                                }
+                            ],
+                            "boxColliderDatas": [],
+                            "spriteRendererDatas": [
+                                {
+                                    "color": {
+                                        "r": 1.0,
+                                        "g": 1.0,
+                                        "b": 1.0,
+                                        "a": 1.0
+                                    },
+                                    "spriteName": "Triangle",
+                                    "material": "Sprite-Lit-Default (Instance)",
+                                    "orderInLayer": 1
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "pieceName": "Obj.3",
+            "componenets": [
+                {
+                    "transformDatas": [
+                        {
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            },
+                            "rotation": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0,
+                                "w": 1.0
+                            },
+                            "scale": {
+                                "x": 1.0,
+                                "y": 1.0,
+                                "z": 1.0
+                            }
+                        }
+                    ],
+                    "boxColliderDatas": [
+                        {
+                            "isTrigger": false,
+                            "offset": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "size": {
+                                "x": 7.0,
+                                "y": 7.0
+                            }
+                        }
+                    ],
+                    "spriteRendererDatas": []
+                }
+            ],
+            "childs": [
+                {
+                    "childName": "Square",
+                    "componenets": [
+                        {
+                            "transformDatas": [
+                                {
+                                    "position": {
+                                        "x": 0.0,
+                                        "y": 0.0,
+                                        "z": 0.0
+                                    },
+                                    "rotation": {
+                                        "x": 0.0,
+                                        "y": 0.0,
+                                        "z": 0.0,
+                                        "w": 1.0
+                                    },
+                                    "scale": {
+                                        "x": 7.0,
+                                        "y": 7.0,
+                                        "z": 1.0
+                                    }
+                                }
+                            ],
+                            "boxColliderDatas": [],
+                            "spriteRendererDatas": [
+                                {
+                                    "color": {
+                                        "r": 0.6603773832321167,
+                                        "g": 0.5515168905258179,
+                                        "b": 0.23985403776168824,
+                                        "a": 1.0
+                                    },
+                                    "spriteName": "Square",
+                                    "material": "Sprite-Lit-Default (Instance)",
+                                    "orderInLayer": 0
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "childName": "Triangle",
+                    "componenets": [
+                        {
+                            "transformDatas": [
+                                {
+                                    "position": {
+                                        "x": 0.0,
+                                        "y": 0.0,
+                                        "z": 0.0
+                                    },
+                                    "rotation": {
+                                        "x": 0.0,
+                                        "y": 0.0,
+                                        "z": 0.0,
+                                        "w": 1.0
+                                    },
+                                    "scale": {
+                                        "x": 1.0,
+                                        "y": 2.0,
+                                        "z": 1.0
+                                    }
+                                }
+                            ],
+                            "boxColliderDatas": [],
+                            "spriteRendererDatas": [
+                                {
+                                    "color": {
+                                        "r": 1.0,
+                                        "g": 1.0,
+                                        "b": 1.0,
+                                        "a": 1.0
+                                    },
+                                    "spriteName": "Triangle",
+                                    "material": "Sprite-Lit-Default (Instance)",
+                                    "orderInLayer": 1
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "pieceName": "Obj.4",
+            "componenets": [
+                {
+                    "transformDatas": [
+                        {
+                            "position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            },
+                            "rotation": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0,
+                                "w": 1.0
+                            },
+                            "scale": {
+                                "x": 1.0,
+                                "y": 1.0,
+                                "z": 1.0
+                            }
+                        }
+                    ],
+                    "boxColliderDatas": [
+                        {
+                            "isTrigger": false,
+                            "offset": {
+                                "x": 0.0,
+                                "y": 0.0
+                            },
+                            "size": {
+                                "x": 7.0,
+                                "y": 7.0
+                            }
+                        }
+                    ],
+                    "spriteRendererDatas": []
+                }
+            ],
+            "childs": [
+                {
+                    "childName": "Square",
+                    "componenets": [
+                        {
+                            "transformDatas": [
+                                {
+                                    "position": {
+                                        "x": 0.0,
+                                        "y": 0.0,
+                                        "z": 0.0
+                                    },
+                                    "rotation": {
+                                        "x": 0.0,
+                                        "y": 0.0,
+                                        "z": 0.0,
+                                        "w": 1.0
+                                    },
+                                    "scale": {
+                                        "x": 7.0,
+                                        "y": 7.0,
+                                        "z": 1.0
+                                    }
+                                }
+                            ],
+                            "boxColliderDatas": [],
+                            "spriteRendererDatas": [
+                                {
+                                    "color": {
+                                        "r": 0.4694417417049408,
+                                        "g": 0.7547169923782349,
+                                        "b": 0.4521181881427765,
+                                        "a": 1.0
+                                    },
+                                    "spriteName": "Square",
+                                    "material": "Sprite-Lit-Default (Instance)",
+                                    "orderInLayer": 0
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "childName": "Triangle",
+                    "componenets": [
+                        {
+                            "transformDatas": [
+                                {
+                                    "position": {
+                                        "x": 0.0,
+                                        "y": 0.0,
+                                        "z": 0.0
+                                    },
+                                    "rotation": {
+                                        "x": 0.0,
+                                        "y": 0.0,
+                                        "z": 0.0,
+                                        "w": 1.0
+                                    },
+                                    "scale": {
+                                        "x": 1.0,
+                                        "y": 2.0,
+                                        "z": 1.0
+                                    }
+                                }
+                            ],
+                            "boxColliderDatas": [],
+                            "spriteRendererDatas": [
+                                {
+                                    "color": {
+                                        "r": 1.0,
+                                        "g": 1.0,
+                                        "b": 1.0,
+                                        "a": 1.0
+                                    },
+                                    "spriteName": "Triangle",
+                                    "material": "Sprite-Lit-Default (Instance)",
+                                    "orderInLayer": 1
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
