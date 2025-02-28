@@ -17,8 +17,8 @@ public static class SaveSystem
 
     public static void Save(string saveString)
     {
-        int saveNumber = 1;
-        while (File.Exists("save_" + saveNumber + ".json"))
+        int saveNumber = 0;
+        while (File.Exists($"{SAVE_FOLDER}save_{saveNumber}.json"))
         {
             saveNumber++;
         }
@@ -48,7 +48,7 @@ public static class SaveSystem
 
         if (mostRecentSave != null)
         {
-            return File.ReadAllText(SAVE_FOLDER + mostRecentSave.FullName);
+            return File.ReadAllText(mostRecentSave.FullName);
         }
         else
         {

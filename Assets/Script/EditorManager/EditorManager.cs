@@ -8,13 +8,16 @@ public class EditorManager : MonoBehaviour
     public bool drawGrid = false;
     public Color gridColor;
     public int gridSize = 13;
-
     private bool grapStatsu = false;
+    private Sprite sprite;
+    private Material material;
+    private Transform existPiece;
 
     void Start()
     {
         SaveSystem.Init();
         Grid grid = new Grid(gridSize, gridSize, grindParent, gridColor);
+        grindParent.gameObject.SetActive(drawGrid);
     }
 
     public void gridSwitch()
@@ -105,15 +108,88 @@ public class EditorManager : MonoBehaviour
             saveObject.trackPieces.Add(pData);
         }
         string json = JsonUtility.ToJson(saveObject);
-        // Debug.Log(json);
         SaveSystem.Save(json);
 
     }
 
     public void Load()
     {
-        // string saveString = SaveSystem.Load();
-        // SaveTrackObject saveObject = JsonUtility.FromJson<SaveTrackObject>(saveString);
+        string json = SaveSystem.Load();
+        if (json != null)
+        {
+            SaveTrackObject saveObject = JsonUtility.FromJson<SaveTrackObject>(json);
+            foreach (pieceData pData in saveObject.trackPieces)
+            {
+                if (trackPieceParent.Find(pData.pieceName) != null)
+                {
+                    existPiece = trackPieceParent.Find(pData.pieceName);
+                    existPiece.transform.position = pData.componenets[0].transformDatas[0].position;
+                    existPiece.transform.rotation = pData.componenets[0].transformDatas[0].rotation;
+                    existPiece.transform.localScale = pData.componenets[0].transformDatas[0].scale;
+                    existPiece.GetComponent<BoxCollider2D>().isTrigger = pData.componenets[0].boxColliderDatas[0].isTrigger;
+                    existPiece.GetComponent<BoxCollider2D>().offset = pData.componenets[0].boxColliderDatas[0].offset;
+                    existPiece.GetComponent<BoxCollider2D>().size = pData.componenets[0].boxColliderDatas[0].size;
+                    foreach (childData chData in pData.childs)
+                    {
+                        foreach (Transform existChild in existPiece)
+                        {
+                            if (existChild.name == chData.childName)
+                            {
+                                existChild.transform.position = chData.componenets[0].transformDatas[0].position;
+                                existChild.transform.rotation = chData.componenets[0].transformDatas[0].rotation;
+                                existChild.transform.localScale = chData.componenets[0].transformDatas[0].scale;
+                                existChild.GetComponent<SpriteRenderer>().color = chData.componenets[0].spriteRendererDatas[0].color;
+                                sprite = Resources.Load<Sprite>($"Sprites/{chData.componenets[0].spriteRendererDatas[0].spriteName}");
+                                if (sprite != null)
+                                    existChild.GetComponent<SpriteRenderer>().sprite = sprite;
+                                material = Resources.Load<Material>($"Mats/{chData.componenets[0].spriteRendererDatas[0].material}");
+                                if (material != null)
+                                    existChild.GetComponent<SpriteRenderer>().material = material;
+                                existChild.GetComponent<SpriteRenderer>().sortingOrder = chData.componenets[0].spriteRendererDatas[0].orderInLayer;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    GameObject newPiece = new GameObject();
+                    newPiece.name = pData.pieceName;
+                    newPiece.transform.parent = trackPieceParent;
+                    newPiece.transform.position = pData.componenets[0].transformDatas[0].position;
+                    newPiece.transform.rotation = pData.componenets[0].transformDatas[0].rotation;
+                    newPiece.transform.localScale = pData.componenets[0].transformDatas[0].scale;
+                    newPiece.AddComponent<BoxCollider2D>();
+                    newPiece.GetComponent<BoxCollider2D>().isTrigger = pData.componenets[0].boxColliderDatas[0].isTrigger;
+                    newPiece.GetComponent<BoxCollider2D>().offset = pData.componenets[0].boxColliderDatas[0].offset;
+                    newPiece.GetComponent<BoxCollider2D>().size = pData.componenets[0].boxColliderDatas[0].size;
+
+                    foreach (childData chData in pData.childs)
+                    {
+
+                        GameObject newChild = new GameObject();
+                        newChild.name = chData.childName;
+                        newChild.transform.parent = newPiece.transform;
+                        newChild.transform.position = chData.componenets[0].transformDatas[0].position;
+                        newChild.transform.rotation = chData.componenets[0].transformDatas[0].rotation;
+                        newChild.transform.localScale = chData.componenets[0].transformDatas[0].scale;
+                        newChild.AddComponent<SpriteRenderer>();
+                        newChild.GetComponent<SpriteRenderer>().color = chData.componenets[0].spriteRendererDatas[0].color;
+                        sprite = Resources.Load<Sprite>($"Sprites/{chData.componenets[0].spriteRendererDatas[0].spriteName}");
+                        if (sprite != null)
+                            newChild.GetComponent<SpriteRenderer>().sprite = sprite;
+                        material = Resources.Load<Material>($"Mats/{chData.componenets[0].spriteRendererDatas[0].material}");
+                        if (material != null)
+                            newChild.GetComponent<SpriteRenderer>().material = material;
+                        newChild.GetComponent<SpriteRenderer>().sortingOrder = chData.componenets[0].spriteRendererDatas[0].orderInLayer;
+                    }
+                }
+
+            }
+        }
+        else
+        {
+            Debug.Log("No Save Found");
+        }
     }
 
     public void statsSwitch()

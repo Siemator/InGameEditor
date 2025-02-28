@@ -19,6 +19,7 @@ public class ObjectManipulation : MonoBehaviour
     private void Start()
     {
         editorInputs = GetComponent<EditorInputs>();
+        objCount = blockParent.childCount;
     }
 
     private void Update()
@@ -122,6 +123,7 @@ public class ObjectManipulation : MonoBehaviour
     private void DuplicateObject(Transform original)
     {
         GameObject newObject = Instantiate(original.gameObject, parent: blockParent);
+        objCount++;
         newObject.name = $"Obj.{objCount}";
         SelectObject(newSelection: newObject.transform);
     }
