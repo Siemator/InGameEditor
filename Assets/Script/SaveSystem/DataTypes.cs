@@ -40,7 +40,7 @@ public class componentsData
 }
 
 [System.Serializable]
-public class pieceData
+public class PieceData
 {
     public string pieceName;
     public List<componentsData> componenets;
@@ -48,8 +48,19 @@ public class pieceData
 }
 
 [System.Serializable]
+public class Metadata
+{
+    public string name;
+    public string author;
+    public string version;
+    public string description;
+    public string date;
+}
+
+[System.Serializable]
 public class SaveTrackObject
 {
-    public List<pieceData> trackPieces;
+    public List<Metadata> Metadata;
+    public List<PieceData> TrackPieces;
 }
 

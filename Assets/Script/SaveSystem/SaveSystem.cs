@@ -15,9 +15,10 @@ public static class SaveSystem
         Debug.Log("Save System Initialized");
     }
 
-    public static void Save(string saveString)
+    public static void Save(string saveString, string saveName = null)
     {
         int saveNumber = 0;
+
         while (File.Exists($"{SAVE_FOLDER}save_{saveNumber}.json"))
         {
             saveNumber++;

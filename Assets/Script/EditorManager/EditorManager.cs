@@ -1,16 +1,16 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class EditorManager : MonoBehaviour
 {
-    public GameObject statsGraph;
+    public GameObject statsGraph, saveUIObject;
     public Transform grindParent, trackPieceParent;
     public bool drawGrid = false;
     public Color gridColor;
     public int gridSize = 13;
-    private bool grapStatsu = false;
-    private Sprite sprite;
-    private Material material;
+    private bool grapStatsu, saveUI = false;
     private Transform existPiece;
 
     void Start()
@@ -31,12 +31,23 @@ public class EditorManager : MonoBehaviour
 
         SaveTrackObject saveObject = new SaveTrackObject()
         {
-            trackPieces = new List<pieceData>()
+            TrackPieces = new List<PieceData>()
         };
+
+        saveObject.Metadata = new List<Metadata>();
+        Metadata mData = new Metadata()
+        {
+            name = saveUIObject.transform.GetChild(1).GetComponent<TMP_InputField>().text,
+            author = saveUIObject.transform.GetChild(2).GetComponent<TMP_InputField>().text,
+            date = System.DateTime.Now.ToString("dd/MM/yyyy"),
+            version = saveUIObject.transform.GetChild(3).GetComponent<TMP_InputField>().text,
+            description = saveUIObject.transform.GetChild(4).GetComponent<TMP_InputField>().text,
+        };
+        saveObject.Metadata.Add(mData);
 
         foreach (Transform trackPiece in trackPieceParent)
         {
-            pieceData pData = new pieceData()
+            PieceData pData = new PieceData()
             {
                 pieceName = trackPiece.name,
                 componenets = new List<componentsData>(),
@@ -105,7 +116,7 @@ public class EditorManager : MonoBehaviour
                 pData.childs.Add(chData);
             }
             pData.componenets.Add(cData);
-            saveObject.trackPieces.Add(pData);
+            saveObject.TrackPieces.Add(pData);
         }
         string json = JsonUtility.ToJson(saveObject);
         SaveSystem.Save(json);
@@ -115,81 +126,75 @@ public class EditorManager : MonoBehaviour
     public void Load()
     {
         string json = SaveSystem.Load();
-        if (json != null)
-        {
-            SaveTrackObject saveObject = JsonUtility.FromJson<SaveTrackObject>(json);
-            foreach (pieceData pData in saveObject.trackPieces)
-            {
-                if (trackPieceParent.Find(pData.pieceName) != null)
-                {
-                    existPiece = trackPieceParent.Find(pData.pieceName);
-                    existPiece.transform.position = pData.componenets[0].transformDatas[0].position;
-                    existPiece.transform.rotation = pData.componenets[0].transformDatas[0].rotation;
-                    existPiece.transform.localScale = pData.componenets[0].transformDatas[0].scale;
-                    existPiece.GetComponent<BoxCollider2D>().isTrigger = pData.componenets[0].boxColliderDatas[0].isTrigger;
-                    existPiece.GetComponent<BoxCollider2D>().offset = pData.componenets[0].boxColliderDatas[0].offset;
-                    existPiece.GetComponent<BoxCollider2D>().size = pData.componenets[0].boxColliderDatas[0].size;
-                    foreach (childData chData in pData.childs)
-                    {
-                        foreach (Transform existChild in existPiece)
-                        {
-                            if (existChild.name == chData.childName)
-                            {
-                                existChild.transform.position = chData.componenets[0].transformDatas[0].position;
-                                existChild.transform.rotation = chData.componenets[0].transformDatas[0].rotation;
-                                existChild.transform.localScale = chData.componenets[0].transformDatas[0].scale;
-                                existChild.GetComponent<SpriteRenderer>().color = chData.componenets[0].spriteRendererDatas[0].color;
-                                sprite = Resources.Load<Sprite>($"Sprites/{chData.componenets[0].spriteRendererDatas[0].spriteName}");
-                                if (sprite != null)
-                                    existChild.GetComponent<SpriteRenderer>().sprite = sprite;
-                                material = Resources.Load<Material>($"Mats/{chData.componenets[0].spriteRendererDatas[0].material}");
-                                if (material != null)
-                                    existChild.GetComponent<SpriteRenderer>().material = material;
-                                existChild.GetComponent<SpriteRenderer>().sortingOrder = chData.componenets[0].spriteRendererDatas[0].orderInLayer;
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    GameObject newPiece = new GameObject();
-                    newPiece.name = pData.pieceName;
-                    newPiece.transform.parent = trackPieceParent;
-                    newPiece.transform.position = pData.componenets[0].transformDatas[0].position;
-                    newPiece.transform.rotation = pData.componenets[0].transformDatas[0].rotation;
-                    newPiece.transform.localScale = pData.componenets[0].transformDatas[0].scale;
-                    newPiece.AddComponent<BoxCollider2D>();
-                    newPiece.GetComponent<BoxCollider2D>().isTrigger = pData.componenets[0].boxColliderDatas[0].isTrigger;
-                    newPiece.GetComponent<BoxCollider2D>().offset = pData.componenets[0].boxColliderDatas[0].offset;
-                    newPiece.GetComponent<BoxCollider2D>().size = pData.componenets[0].boxColliderDatas[0].size;
-
-                    foreach (childData chData in pData.childs)
-                    {
-
-                        GameObject newChild = new GameObject();
-                        newChild.name = chData.childName;
-                        newChild.transform.parent = newPiece.transform;
-                        newChild.transform.position = chData.componenets[0].transformDatas[0].position;
-                        newChild.transform.rotation = chData.componenets[0].transformDatas[0].rotation;
-                        newChild.transform.localScale = chData.componenets[0].transformDatas[0].scale;
-                        newChild.AddComponent<SpriteRenderer>();
-                        newChild.GetComponent<SpriteRenderer>().color = chData.componenets[0].spriteRendererDatas[0].color;
-                        sprite = Resources.Load<Sprite>($"Sprites/{chData.componenets[0].spriteRendererDatas[0].spriteName}");
-                        if (sprite != null)
-                            newChild.GetComponent<SpriteRenderer>().sprite = sprite;
-                        material = Resources.Load<Material>($"Mats/{chData.componenets[0].spriteRendererDatas[0].material}");
-                        if (material != null)
-                            newChild.GetComponent<SpriteRenderer>().material = material;
-                        newChild.GetComponent<SpriteRenderer>().sortingOrder = chData.componenets[0].spriteRendererDatas[0].orderInLayer;
-                    }
-                }
-
-            }
-        }
-        else
+        if (json == null)
         {
             Debug.Log("No Save Found");
+            return;
         }
+
+        SaveTrackObject saveObject = JsonUtility.FromJson<SaveTrackObject>(json);
+
+        foreach (PieceData pData in saveObject.TrackPieces)
+        {
+            if (trackPieceParent.Find(pData.pieceName) == null)
+            {
+                GameObject newPiece = new GameObject();
+                parentPieceDataUpdate(newPiece.transform, pData, true, trackPieceParent);
+
+                foreach (childData chData in pData.childs)
+                {
+                    GameObject newChild = new GameObject();
+                    childPieceDataUpdate(newChild.transform, chData, true, newPiece.transform);
+                }
+            }
+
+            existPiece = trackPieceParent.Find(pData.pieceName);
+            parentPieceDataUpdate(existPiece, pData);
+            foreach (childData chData in pData.childs)
+            {
+                foreach (Transform existChild in existPiece)
+                {
+                    if (existChild.name == chData.childName)
+                    {
+                        childPieceDataUpdate(existChild, chData);
+                    }
+                }
+            }
+
+
+        }
+    }
+
+    private void childPieceDataUpdate(Transform piece, childData chData, bool newObject = false, Transform parent = null)
+    {
+        if (newObject)
+        {
+            piece.gameObject.AddComponent<SpriteRenderer>();
+            piece.name = chData.childName;
+            piece.parent = parent;
+        }
+        SpriteRenderer pieceSpriteRenderer = piece.GetComponent<SpriteRenderer>();
+        DataUtils.UpdateTransform(piece, chData.componenets[0].transformDatas[0]);
+        DataUtils.UpdateSpriteRenderer(pieceSpriteRenderer, chData.componenets[0].spriteRendererDatas[0]);
+    }
+
+    private void parentPieceDataUpdate(Transform piece, PieceData pData, bool newObj = false, Transform parent = null)
+    {
+        if (newObj)
+        {
+            piece.gameObject.AddComponent<BoxCollider2D>();
+            piece.name = pData.pieceName;
+            piece.parent = parent;
+        }
+        BoxCollider2D pieceBoxColider = piece.GetComponent<BoxCollider2D>();
+        DataUtils.UpdateTransform(piece, pData.componenets[0].transformDatas[0]);
+        DataUtils.UpdateBoxCollider(pieceBoxColider, pData.componenets[0].boxColliderDatas[0]);
+    }
+
+    public void saveUISwitch()
+    {
+        saveUI = !saveUI;
+        saveUIObject.SetActive(saveUI);
     }
 
     public void statsSwitch()

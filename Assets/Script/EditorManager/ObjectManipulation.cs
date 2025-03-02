@@ -4,7 +4,7 @@ using UnityEngine;
 public class ObjectManipulation : MonoBehaviour
 {
     [Header("References")]
-    public Transform blockParent;
+    public Transform blockParent, saveUI;
     private EditorInputs editorInputs;
 
     [Header("Settings")]
@@ -24,14 +24,17 @@ public class ObjectManipulation : MonoBehaviour
 
     private void Update()
     {
-        HandleSelectionAndDuplication();
-        HandleDestruction();
-        HandleLastHovering();
-
-        if (selectedObject != null)
+        if (!saveUI.gameObject.activeSelf)
         {
-            HandleMovement();
-            HandleRotation();
+            HandleSelectionAndDuplication();
+            HandleDestruction();
+            HandleLastHovering();
+
+            if (selectedObject != null)
+            {
+                HandleMovement();
+                HandleRotation();
+            }
         }
     }
 

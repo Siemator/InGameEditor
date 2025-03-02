@@ -8,6 +8,7 @@ public class CameraControl : MonoBehaviour
     private bool isDragging = false;
     private Vector3 lastMousePosition;
 
+    public Transform saveUI;
     public float baseMoveSpeed = 5f;
     public float zoomSpeed = 2f;
     public float minZoom = 2f;
@@ -21,8 +22,11 @@ public class CameraControl : MonoBehaviour
 
     void Update()
     {
-        HandleZoom();
-        HandleCameraMovement();
+        if (!saveUI.gameObject.activeSelf)
+        {
+            HandleZoom();
+            HandleCameraMovement();
+        }
     }
 
     void HandleZoom()
