@@ -4,7 +4,7 @@ using UnityEngine;
 public class ObjectManipulation : MonoBehaviour
 {
     [Header("References")]
-    public Transform blockParent;
+    public Transform blockParent, saveUI;
     private EditorInputs editorInputs;
 
     [Header("Settings")]
@@ -19,18 +19,22 @@ public class ObjectManipulation : MonoBehaviour
     private void Start()
     {
         editorInputs = GetComponent<EditorInputs>();
+        objCount = blockParent.childCount;
     }
 
     private void Update()
     {
-        HandleSelectionAndDuplication();
-        HandleDestruction();
-        HandleLastHovering();
-
-        if (selectedObject != null)
+        if (!saveUI.gameObject.activeSelf)
         {
-            HandleMovement();
-            HandleRotation();
+            HandleSelectionAndDuplication();
+            HandleDestruction();
+            HandleLastHovering();
+
+            if (selectedObject != null)
+            {
+                HandleMovement();
+                HandleRotation();
+            }
         }
     }
 
@@ -122,6 +126,7 @@ public class ObjectManipulation : MonoBehaviour
     private void DuplicateObject(Transform original)
     {
         GameObject newObject = Instantiate(original.gameObject, parent: blockParent);
+        objCount++;
         newObject.name = $"Obj.{objCount}";
         SelectObject(newSelection: newObject.transform);
     }
