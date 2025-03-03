@@ -16,12 +16,24 @@ public class ObjectManipulation : MonoBehaviour
 
     private int objCount;
 
+    /// <summary>
+    /// Initializes the component by retrieving the EditorInputs instance and setting the initial object count 
+    /// based on the number of children under blockParent.
+    /// </summary>
     private void Start()
     {
         editorInputs = GetComponent<EditorInputs>();
         objCount = blockParent.childCount;
     }
 
+    /// <summary>
+    /// Processes user input for object manipulation each frame when the save UI is inactive.
+    /// </summary>
+    /// <remarks>
+    /// This method is invoked every frame by Unity's engine. It checks if the save UI is not active and,
+    /// if so, enables object selection, duplication, destruction, and hover detection. When an object is selected,
+    /// it also updates its movement and rotation based on user input.
+    /// </remarks>
     private void Update()
     {
         if (!saveUI.gameObject.activeSelf)
@@ -123,6 +135,10 @@ public class ObjectManipulation : MonoBehaviour
     #endregion
 
     #region Duplication
+    /// <summary>
+    /// Duplicates the specified game object by instantiating it as a child of the blockParent, assigning it a unique name, and selecting the new object.
+    /// </summary>
+    /// <param name="original">The transform of the object to duplicate.</param>
     private void DuplicateObject(Transform original)
     {
         GameObject newObject = Instantiate(original.gameObject, parent: blockParent);

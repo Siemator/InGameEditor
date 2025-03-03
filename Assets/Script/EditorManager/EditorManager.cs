@@ -13,6 +13,13 @@ public class EditorManager : MonoBehaviour
     private bool grapStatsu, saveUI = false;
     private Transform existPiece;
 
+    /// <summary>
+    /// Initializes the save system and configures the grid display.
+    /// </summary>
+    /// <remarks>
+    /// Called on startup, this method initializes the SaveSystem, creates a new Grid using the specified gridSize for both dimensions and gridColor,
+    /// and sets the active state of the grid’s parent GameObject (grindParent) based on the drawGrid flag.
+    /// </remarks>
     void Start()
     {
         SaveSystem.Init();
@@ -20,12 +27,27 @@ public class EditorManager : MonoBehaviour
         grindParent.gameObject.SetActive(drawGrid);
     }
 
+    /// <summary>
+    /// Toggles the visibility of the grid by inverting the display flag and updating the grid parent’s active state.
+    /// </summary>
+    /// <remarks>
+    /// This method switches the current state of the grid display, enabling it if disabled and disabling it if enabled.
+    /// </remarks>
     public void gridSwitch()
     {
         drawGrid = !drawGrid;
         grindParent.gameObject.SetActive(drawGrid);
     }
 
+    /// <summary>
+    /// Serializes the current editor state—including track pieces and metadata—and saves it as a JSON file.
+    /// </summary>
+    /// <remarks>
+    /// This method gathers metadata from designated UI input fields (track name, author, version, description, and the current date)
+    /// and iterates over all track pieces under the specified parent transform. For each track piece, it captures transform and
+    /// collider information, and for each child piece, it records transform and sprite renderer details. The aggregated data is
+    /// then converted to a JSON string and persisted via the SaveSystem.
+    /// </remarks>
     public void Save()
     {
 
@@ -123,6 +145,13 @@ public class EditorManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Loads the saved track configuration from persistent storage and updates the scene accordingly.
+    /// </summary>
+    /// <remarks>
+    /// Deserializes a JSON string into a SaveTrackObject. If no saved data is found, an informational message is logged and the load process is aborted.
+    /// For each track piece, the method creates new GameObjects if they do not exist and updates existing ones by applying parent and child data through dedicated update routines.
+    /// </remarks>
     public void Load()
     {
         string json = SaveSystem.Load();
@@ -165,6 +194,13 @@ public class EditorManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Updates a child track piece’s transform and sprite renderer using the provided data, optionally initializing it as a new object.
+    /// </summary>
+    /// <param name="piece">The Transform component of the child track piece to update.</param>
+    /// <param name="chData">The data object containing the child's name and component configurations.</param>
+    /// <param name="newObject">If true, adds a SpriteRenderer component to a new child object, sets its name, and assigns its parent.</param>
+    /// <param name="parent">The parent Transform to assign to the child track piece if initializing a new object.</param>
     private void childPieceDataUpdate(Transform piece, childData chData, bool newObject = false, Transform parent = null)
     {
         if (newObject)
@@ -178,6 +214,17 @@ public class EditorManager : MonoBehaviour
         DataUtils.UpdateSpriteRenderer(pieceSpriteRenderer, chData.componenets[0].spriteRendererDatas[0]);
     }
 
+    /// <summary>
+    /// Updates a parent piece's transform and collider properties using the provided piece data.
+    /// </summary>
+    /// <param name="piece">The transform of the parent piece to update.</param>
+    /// <param name="pData">The data containing the updated transform and collider configurations.</param>
+    /// <param name="newObj">
+    /// If set to true, initializes the piece by adding a BoxCollider2D, assigning its name from the data, and setting its parent transform.
+    /// </param>
+    /// <param name="parent">
+    /// The parent transform to assign if the piece is newly created. Ignored if newObj is false.
+    /// </param>
     private void parentPieceDataUpdate(Transform piece, PieceData pData, bool newObj = false, Transform parent = null)
     {
         if (newObj)
@@ -191,18 +238,34 @@ public class EditorManager : MonoBehaviour
         DataUtils.UpdateBoxCollider(pieceBoxColider, pData.componenets[0].boxColliderDatas[0]);
     }
 
+    /// <summary>
+    /// Toggles the visibility of the save UI.
+    /// </summary>
+    /// <remarks>
+    /// Inverts the current state of the save UI flag and updates the active state of the associated UI GameObject accordingly.
+    /// </remarks>
     public void saveUISwitch()
     {
         saveUI = !saveUI;
         saveUIObject.SetActive(saveUI);
     }
 
+    /// <summary>
+    /// Toggles the visibility of the statistics graph UI element.
+    /// </summary>
+    /// <remarks>
+    /// Inverts the internal display flag and updates the active state of the statistics graph accordingly.
+    /// </remarks>
     public void statsSwitch()
     {
         grapStatsu = !grapStatsu;
         statsGraph.SetActive(grapStatsu);
     }
 
+    /// <summary>
+    /// Toggles vertical synchronization by switching QualitySettings.vSyncCount between 0 and 1.
+    /// If vSync is disabled (vSyncCount equals 0), it enables vSync by setting vSyncCount to 1; otherwise, it disables vSync.
+    /// </summary>
     public void vSync()
     {
         if (QualitySettings.vSyncCount == 0)
@@ -211,6 +274,12 @@ public class EditorManager : MonoBehaviour
             QualitySettings.vSyncCount = 0;
     }
 
+    /// <summary>
+    /// Exits the application.
+    /// </summary>
+    /// <remarks>
+    /// This method calls Application.Quit to terminate the application. Note that in the Unity editor, this call will not exit play mode.
+    /// </remarks>
     public void exitApp()
     {
         Application.Quit();
