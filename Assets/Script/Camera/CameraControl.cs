@@ -20,6 +20,12 @@ public class CameraControl : MonoBehaviour
         cam = this.GetComponent<Camera>();
     }
 
+    /// <summary>
+    /// Updates the camera controls by processing zoom and panning inputs when the save UI is inactive.
+    /// </summary>
+    /// <remarks>
+    /// This method is called once per frame. It checks if the save UI is not active and, if so, calls the functions responsible for adjusting the camera's zoom level and position based on user input.
+    /// </remarks>
     void Update()
     {
         if (!saveUI.gameObject.activeSelf)
@@ -29,6 +35,13 @@ public class CameraControl : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Adjusts the camera's zoom level based on scroll input.
+    /// </summary>
+    /// <remarks>
+    /// When a scroll input is detected, this method decreases the camera's orthographic size by the product of the scroll movement and the zoom speed,
+    /// then clamps the value between the defined minimum and maximum zoom limits.
+    /// </remarks>
     void HandleZoom()
     {
         if (cameraImputs.scrollMove != 0)

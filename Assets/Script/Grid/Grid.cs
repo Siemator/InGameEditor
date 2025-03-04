@@ -8,6 +8,16 @@ public class Grid
     private float cellSize = 7f;
     private Color gridColor;
 
+    /// <summary>
+    /// Initializes a new instance of the Grid class with the specified dimensions, parent transform, and grid line color.
+    /// </summary>
+    /// <param name="width">The number of cells along the horizontal axis.</param>
+    /// <param name="height">The number of cells along the vertical axis.</param>
+    /// <param name="pointParent">The parent Transform to which the grid's line renderers are attached.</param>
+    /// <param name="gridColor">The color used for drawing the grid lines.</param>
+    /// <remarks>
+    /// This constructor creates a two-dimensional grid array, draws the visual grid lines, and logs each cell's initial value.
+    /// </remarks>
     public Grid(int width, int height, Transform pointParent, Color gridColor)
     {
         this.width = width;
@@ -25,6 +35,14 @@ public class Grid
         }
     }
 
+    /// <summary>
+    /// Draws the grid's vertical and horizontal lines to visualize the grid structure in the Unity scene.
+    /// </summary>
+    /// <remarks>
+    /// Computes the total grid size using the cell size and grid dimensions, determines an offset to center the grid,
+    /// and then draws vertical lines (width + 1) and horizontal lines (height + 1) by calculating their start and end positions.
+    /// Each line is rendered by calling the CreateLineRenderer method.
+    /// </remarks>
     private void DrawGridLines()
     {
         // Calculate total grid size and offset to center the grid
@@ -50,6 +68,12 @@ public class Grid
     }
 
 
+    /// <summary>
+    /// Creates and configures a LineRenderer to draw a line between two world positions.
+    /// </summary>
+    /// <param name="start">The starting position of the line in world space.</param>
+    /// <param name="end">The ending position of the line in world space.</param>
+    /// <param name="lineName">The name assigned to the new GameObject holding the line.</param>
     private void CreateLineRenderer(Vector3 start, Vector3 end, string lineName)
     {
         // Create a new GameObject for the line and parent it under the pointParent
